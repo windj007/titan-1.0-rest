@@ -11,7 +11,7 @@ plugins:
   - aurelius.titan
 scriptEngines: {
   gremlin-groovy: {
-    imports: [java.lang.Math],
+    imports: [java.lang.Math,org.apache.tinkerpop.gremlin.process.traversal.*,org.apache.tinkerpop.gremlin.structure.*],
     staticImports: [java.lang.Math.PI],
     scripts: [scripts/empty-sample.groovy]}}
 serializers:
