@@ -2,11 +2,11 @@ host: 0.0.0.0
 port: 8182
 threadPoolWorker: 1
 gremlinPool: 8
-scriptEvaluationTimeout: 30000
-serializedResponseTimeout: 30000
+scriptEvaluationTimeout: 3000000
+serializedResponseTimeout: 3000000
 channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 graphs: {
-  graph: conf/titan-cassandra-es.properties}
+  graph: conf/titan.properties}
 plugins:
   - aurelius.titan
 scriptEngines: {
@@ -17,8 +17,9 @@ scriptEngines: {
 serializers:
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0, config: { useMapperFromGraph: graph }}
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0, config: { useMapperFromGraph: graph }}
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerGremlinV1d0, config: { useMapperFromGraph: graph }}
 processors:
-  - { className: org.apache.tinkerpop.gremlin.server.op.session.SessionOpProcessor, config: { sessionTimeout: 28800000 }}
+  - { className: org.apache.tinkerpop.gremlin.server.op.session.SessionOpProcessor, config: { sessionTimeout: 288000000 }}
 metrics: {
   consoleReporter: {enabled: true, interval: 180000},
   csvReporter: {enabled: true, interval: 180000, fileName: /tmp/gremlin-server-metrics.csv},
@@ -27,13 +28,12 @@ metrics: {
   gangliaReporter: {enabled: false, interval: 180000, addressingMode: MULTICAST},
   graphiteReporter: {enabled: false, interval: 180000}}
 threadPoolBoss: 1
-maxInitialLineLength: 4096
-maxHeaderSize: 81920
+maxInitialLineLength: 4096000
+maxHeaderSize: 8192000
 maxChunkSize: 2097152
 maxContentLength: 20971520
 maxAccumulationBufferComponents: 1024
 resultIterationBatchSize: 64
-writeBufferHighWaterMark: 32768
-writeBufferHighWaterMark: 65536
+writeBufferHighWaterMark: 65536000
 ssl: {
   enabled: false}

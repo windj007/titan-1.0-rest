@@ -14,9 +14,13 @@ WORKDIR /srv/titan-1.0.0-hadoop1
 
 COPY gremlin-server.yaml conf/gremlin-server/
 COPY titan-cassandra-es.properties conf/
+COPY titan-bdb-es.properties conf/
 COPY entry-point.sh /entry-point.sh
+COPY gremlin-server.sh bin/
 
 ENTRYPOINT ["/entry-point.sh"]
 EXPOSE 8182
+
+VOLUME ["/data"]
 
 CMD ["bin/gremlin-server.sh", "conf/gremlin-server/gremlin-server.yaml"]
