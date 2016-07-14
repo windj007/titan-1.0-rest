@@ -32,9 +32,10 @@ else
     sed -i "s/index.search.hostname=es/index.search.hostname=$ELASTICSEARCH_HOST/" /srv/titan-1.0.0-hadoop1/conf/titan.properties
 fi
 
-if [ ! -z "$SCHEMA_DEFAULT"]
+echo "Schema policy is $SCHEMA_DEFAULT"
+if [ "$SCHEMA_DEFAULT" != "" ]
 then
-    sed -i -r "s/schema.default\s*=\s*\S+/schema.default = $SCHEMA_DEFAULT/" /srv/titan-1.0.0-hadoop1/conf/titan.properties
+    sed -i "s/schema.default = none/schema.default = $SCHEMA_DEFAULT/" /srv/titan-1.0.0-hadoop1/conf/titan.properties
 fi
 
 exec $@
