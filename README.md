@@ -13,6 +13,7 @@ A very simple image that runs [Titan graph database v1.0.0](http://thinkaurelius
         --link test_cassandra:cassandra \
         --link test_es:es \
         -e "BACKEND=cassandra" \
+        -e "SCHEMA_DEFAULT=default" \
         windj007/titan-rest
     
     # test
@@ -28,6 +29,8 @@ A very simple image that runs [Titan graph database v1.0.0](http://thinkaurelius
     docker run -d --name test_titan \
         --link test_es:es \
         -e "BACKEND=bdb" \
+        -e "SCHEMA_DEFAULT=default" \
+        -v /tmp/data:/data \
         windj007/titan-rest
     
     # test
@@ -48,3 +51,11 @@ Sometimes it can be useful to not to use Docker linking, e.g. to optimize networ
     # test
     curl "http://localhost:8182/?gremlin=g.V().count()"
 
+# Environment Options
+
+Image supports the following options:
+
+* BACKEND={bdb,cassandra} - which backend to use. If bdb is chosen, you should map some folder from host to persist data (see BDB example).
+* SCHEMA_DEFAULT={none,default} - whether to allow automatic schema inference or not. Default is none, which requires explicit schema specification before use.
+* HPROF_OPTIONS - options to -Xrunhprof[:options].
+* JAVA_XMX - max heap for JVM.

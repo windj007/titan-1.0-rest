@@ -58,6 +58,10 @@ if [ "$JAVA_OPTIONS" = "" ] ; then
     JAVA_OPTIONS="-Xms32m -Xmx$JAVA_XMX -javaagent:$LIB/jamm-0.3.0.jar"
 fi
 
+if [ "$HPROF_OPTIONS" != "" ] ; then
+    JAVA_OPTIONS="$JAVA_OPTIONS -Xrunhprof:$HPROF_OPTIONS"
+fi
+
 # Execute the application and return its exit code
 set -x
 if [ "$1" = "-i" ]; then
