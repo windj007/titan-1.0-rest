@@ -30,8 +30,8 @@ metrics: {
 threadPoolBoss: 1
 maxInitialLineLength: 4096000
 maxHeaderSize: 8192000
-maxChunkSize: 2097152
-maxContentLength: 20971520
+maxChunkSize: 2097152000
+maxContentLength: 2097152000
 maxAccumulationBufferComponents: 1024
 resultIterationBatchSize: 64
 writeBufferHighWaterMark: 65536000
