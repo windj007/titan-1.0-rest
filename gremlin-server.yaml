@@ -6,7 +6,7 @@ scriptEvaluationTimeout: 3000000
 serializedResponseTimeout: 3000000
 channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 graphs: {
-  graph: conf/titan.properties}
+  graph: /srv/titan-1.1.0-SNAPSHOT-hadoop2/conf/titan.properties}
 plugins:
   - aurelius.titan
 scriptEngines: {

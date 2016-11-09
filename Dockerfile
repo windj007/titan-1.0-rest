@@ -18,11 +18,11 @@ RUN git clone https://github.com/thinkaurelius/titan.git /tmp/titan && \
 
 WORKDIR /srv/titan-1.1.0-SNAPSHOT-hadoop2
 
-COPY gremlin-server.yaml conf/gremlin-server/
-COPY titan-cassandra-es.properties conf/
-COPY titan-bdb-es.properties conf/
+COPY gremlin-server.yaml /srv/titan-1.1.0-SNAPSHOT-hadoop2/conf/gremlin-server/
+COPY titan-cassandra-es.properties /srv/titan-1.1.0-SNAPSHOT-hadoop2/conf/
+COPY titan-bdb-es.properties /srv/titan-1.1.0-SNAPSHOT-hadoop2/conf/
 COPY entry-point.sh /entry-point.sh
-COPY gremlin-server.sh bin/
+COPY gremlin-server.sh /srv/titan-1.1.0-SNAPSHOT-hadoop2/bin/
 
 ENTRYPOINT ["/entry-point.sh"]
 EXPOSE 8182

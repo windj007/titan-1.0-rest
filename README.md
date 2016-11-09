@@ -4,22 +4,29 @@ A very simple image that runs [Titan graph database v1.0.0](http://thinkaurelius
 # Examples
 
 ## Basic Usage - Cassandra
+    # create test network
+    docker network create test_titan_network
+
     # run indexing dependencies
-    docker run -d --name test_cassandra spotify/cassandra
-    docker run -d --name test_es elasticsearch:1.5
-    
+    docker run -d --net=test_titan_network --name test_cassandra spotify/cassandra
+    docker run -d --net=test_titan_network --name test_es elasticsearch:1.5
+
     # run titan
     docker run -d --name test_titan \
+        --net=test_titan_network \
         --link test_cassandra:cassandra \
         --link test_es:es \
         -e "BACKEND=cassandra" \
         -e "SCHEMA_DEFAULT=default" \
         windj007/titan-rest
-    
+
     # test
     export TITAN_IP=`docker inspect -f '{{ .NetworkSettings.IPAddress }}' test_titan`
     curl "http://$TITAN_IP:8182/?gremlin=g.V().count()"
 
+    # cleanup
+    docker rm -f test_cassandra test_es test_titan
+    docker network rm test_titan_network
 
 ## Basic Usage - BerkeleyDB
     # run indexing dependencies
